@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.HomeFragment">
@@ -12,15 +13,15 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
         android:paddingStart="30dp"
-        android:paddingEnd="30dp"
         android:paddingTop="25dp"
+        android:paddingEnd="30dp"
         android:text="@string/header_primary_label"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/header_secondary"
-        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0" />
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/header_secondary"
@@ -29,36 +30,52 @@
         android:fontFamily="sans-serif-black"
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
-        android:textColor="@color/green_dark"
         android:text="@string/header_secondary_label"
+        android:textColor="@color/green_dark"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintTop_toBottomOf="@+id/header_primary" />
+        app:layout_constraintTop_toBottomOf="@+id/header_primary"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <ImageView
         android:id="@+id/selected_image"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="20dp"
-        android:src="@drawable/error"
+        android:contentDescription="@string/selected_image_label"
         app:layout_constraintBottom_toTopOf="@+id/select_button"
-        app:layout_constraintTop_toBottomOf="@+id/header_secondary"
-        android:contentDescription="@string/selected_image_label" />
+        app:layout_constraintTop_toBottomOf="@+id/header_secondary" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/reset_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/reset_button_background"
+        android:fontFamily="sans-serif"
+        android:text="@string/reset_button_label"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/select_button"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toStartOf="@+id/header_primary"
+        app:layout_constraintTop_toTopOf="@+id/select_button"
+        app:layout_constraintVertical_bias="0" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/select_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="monospace"
+        android:backgroundTint="@color/green_dark"
+        android:fontFamily="sans-serif"
         android:text="@string/select_button_label"
-        android:textStyle="bold"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/header_primary"
         app:layout_constraintTop_toBottomOf="@+id/header_secondary"
-        app:layout_constraintVertical_bias="0.7" />
+        app:layout_constraintVertical_bias="0.3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
