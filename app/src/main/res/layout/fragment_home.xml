@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.HomeFragment">
+
+    <TextView
+        android:id="@+id/header_primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:paddingTop="25dp"
+        android:text="@string/header_primary_label"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/header_secondary"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
+    <TextView
+        android:id="@+id/header_secondary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:textColor="@color/green_dark"
+        android:text="@string/header_secondary_label"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toBottomOf="@+id/header_primary" />
+
+    <ImageView
+        android:id="@+id/selected_image"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:src="@drawable/error"
+        app:layout_constraintBottom_toTopOf="@+id/select_button"
+        app:layout_constraintTop_toBottomOf="@+id/header_secondary"
+        android:contentDescription="@string/selected_image_label" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/select_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:text="@string/select_button_label"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/header_primary"
+        app:layout_constraintTop_toBottomOf="@+id/header_secondary"
+        app:layout_constraintVertical_bias="0.7" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

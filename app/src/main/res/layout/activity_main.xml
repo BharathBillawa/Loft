@@ -30,6 +30,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
+        android:id="@+id/view"
         android:layout_width="100dp"
         android:layout_height="0dp"
         android:background="@drawable/triangle_background"
@@ -39,12 +40,36 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph" />
+        app:layout_constraintVertical_bias="0.0"
+        app:navGraph="@navigation/nav_graph"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <View
+        android:layout_width="70dp"
+        android:layout_height="150dp"
+        android:background="@drawable/quadrilateral_background2"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_background"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/bottom_background"
+        android:layout_width="170dp"
+        android:layout_height="30dp"
+        android:background="@drawable/quadrilateral_background2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:background="@drawable/quadrilateral_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
