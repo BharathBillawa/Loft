@@ -7,6 +7,7 @@ import android.graphics.ImageDecoder
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -120,13 +121,12 @@ class HomeFragment : Fragment() {
         selectedImageView = rootView.findViewById(R.id.selected_image)
 
         selectButton.setOnClickListener {
-            val intent = Intent()
-            intent.type = INTENT_TYPE_IMAGE
-            intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(
-                Intent.createChooser(intent, SELECT_IMAGE_INTENT_TITLE),
-                SELECT_IMAGE_REQUEST_CODE
+            val intent = Intent(
+                Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
             )
+            intent.type = INTENT_TYPE_IMAGE
+            startActivityForResult(intent, SELECT_IMAGE_REQUEST_CODE)
         }
     }
 }
