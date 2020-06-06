@@ -7,8 +7,20 @@
 
     <fragment
         android:id="@+id/startFragment"
+        android:name="com.example.loft.fragments.StartFragment"
+        android:label="@string/start_fragment_label"
+        tools:layout="@layout/fragment_start">
+        <action
+            android:id="@+id/action_start_home_fragment"
+            app:destination="@id/homeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/startFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
         android:name="com.example.loft.fragments.HomeFragment"
-        android:label="home_fragment_label"
+        android:label="@string/home_fragment_label"
         tools:layout="@layout/fragment_home">
     </fragment>
 </navigation>
