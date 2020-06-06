@@ -1,2 +1,3 @@
+include ':classifier'
 include ':app'
 rootProject.name = "Loft"
