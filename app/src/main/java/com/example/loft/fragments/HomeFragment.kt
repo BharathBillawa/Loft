@@ -3,7 +3,6 @@ package com.example.loft.fragments
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.ImageDecoder
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -14,12 +13,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.transition.TransitionManager
 import com.example.classifier.Recognition
 import com.example.classifier.TFImageClassifier
 import com.example.loft.R
+import com.google.android.material.card.MaterialCardView
 
 class HomeFragment : Fragment() {
     companion object {
@@ -32,13 +33,18 @@ class HomeFragment : Fragment() {
         @JvmStatic private val BUTTON_DEFAULT_HORIZONTAL_BIAS = 0.5f
         @JvmStatic private val IMAGE_WIDTH = 224
         @JvmStatic private val IMAGE_HEIGHT = 224
+        @JvmStatic private val BLANK_TEXT = ""
     }
 
     private lateinit var selectButton: Button
     private lateinit var resetButton: Button
     private lateinit var selectedImageView: ImageView
+    private lateinit var resultCardView: MaterialCardView
     private lateinit var rootConstraintLayout: ConstraintLayout
     private lateinit var tfClassifier: TFImageClassifier
+
+    private val detectionLabelTVs: ArrayList<TextView> = ArrayList(3)
+    private val detectionPercentageTVs: ArrayList<TextView> = ArrayList(3)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +53,20 @@ class HomeFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_home, container, false)
         setupImageSelection(rootView)
         setupImageReset(rootView)
+        setupResultBlock(rootView)
         return rootView
+    }
+
+    private fun setupResultBlock(rootView: View) {
+        resultCardView = rootView.findViewById(R.id.result_block)
+
+        detectionLabelTVs.add(rootView.findViewById(R.id.detection1_label))
+        detectionLabelTVs.add(rootView.findViewById(R.id.detection2_label))
+        detectionLabelTVs.add(rootView.findViewById(R.id.detection3_label))
+
+        detectionPercentageTVs.add(rootView.findViewById(R.id.detection1_percentage))
+        detectionPercentageTVs.add(rootView.findViewById(R.id.detection2_percentage))
+        detectionPercentageTVs.add(rootView.findViewById(R.id.detection3_percentage))
     }
 
     override fun onResume() {
@@ -67,7 +86,9 @@ class HomeFragment : Fragment() {
     private fun handleImageReset() {
         TransitionManager.beginDelayedTransition(rootConstraintLayout)
         selectedImageView.setImageDrawable(null)
+        resetResultBlock()
         resetButton.visibility = View.GONE
+        resultCardView.visibility = View.GONE
         val layoutParams  = selectButton.layoutParams as ConstraintLayout.LayoutParams
         layoutParams.verticalBias = BUTTON__DEFAULT_VERTICAL_BIAS
         layoutParams.horizontalBias = BUTTON_DEFAULT_HORIZONTAL_BIAS
@@ -109,6 +130,27 @@ class HomeFragment : Fragment() {
             LOGGER_TAG,
             "Got the following results from Tensorflow: $results"
         )
+        handleClassificationResult(results)
+    }
+
+    private fun handleClassificationResult(result: Collection<Recognition?>?) {
+        resetResultBlock()
+
+        if (result != null) {
+            for ( (index, recognition) in result.withIndex()) {
+                detectionLabelTVs[index].text = recognition?.getTitle() ?: BLANK_TEXT
+                val confidence = recognition?.getConfidence() ?: 0f
+                val confidenceString = String.format("%.1f%%", confidence * 100.0f)
+                detectionPercentageTVs[index].text = confidenceString
+            }
+        }
+    }
+
+    private fun resetResultBlock() {
+        for ((index, textView) in detectionLabelTVs.withIndex()) {
+            textView.text = BLANK_TEXT
+            detectionPercentageTVs[index].text = BLANK_TEXT
+        }
     }
 
     private fun displaySelectedImage(bitmap: Bitmap) {
@@ -122,6 +164,7 @@ class HomeFragment : Fragment() {
         layoutParams.horizontalBias = BUTTON_HORIZONTAL_BIAS_WITH_IMAGE
         selectButton.layoutParams = layoutParams
         selectButton.text = getString(R.string.select_new_button_label)
+        resultCardView.visibility = View.VISIBLE
     }
 
     private fun setupImageSelection(rootView: View) {

@@ -8,4 +8,6 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="reset_button_background">#D2EC4646</color>
+    <color name="result_label">#FFBF00</color>
+    <color name="result_percentage">#A57C02</color>
 </resources>

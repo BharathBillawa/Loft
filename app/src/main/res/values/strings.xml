@@ -9,4 +9,5 @@
     <string name="select_new_button_label">Select New</string>
     <string name="selected_image_label">Selected image</string>
     <string name="reset_button_label">Reset</string>
+    <string name="app_title">Loft</string>
 </resources>
