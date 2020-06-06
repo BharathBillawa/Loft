@@ -17,25 +17,28 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.transition.TransitionManager
+import com.example.classifier.Recognition
+import com.example.classifier.TFImageClassifier
 import com.example.loft.R
-import java.io.IOException
 
 class HomeFragment : Fragment() {
     companion object {
         @JvmStatic private val LOGGER_TAG = "HomeFragment"
-        @JvmStatic private val SELECT_IMAGE_INTENT_TITLE = "Select a Image"
         @JvmStatic private val SELECT_IMAGE_REQUEST_CODE = 7
         @JvmStatic private val INTENT_TYPE_IMAGE = "image/*"
         @JvmStatic private val BUTTON_VERTICAL_BIAS_WITH_IMAGE = 0.7f
         @JvmStatic private val BUTTON_HORIZONTAL_BIAS_WITH_IMAGE = 0.7f
         @JvmStatic private val BUTTON__DEFAULT_VERTICAL_BIAS = 0.3f
         @JvmStatic private val BUTTON_DEFAULT_HORIZONTAL_BIAS = 0.5f
+        @JvmStatic private val IMAGE_WIDTH = 224
+        @JvmStatic private val IMAGE_HEIGHT = 224
     }
 
     private lateinit var selectButton: Button
     private lateinit var resetButton: Button
     private lateinit var selectedImageView: ImageView
     private lateinit var rootConstraintLayout: ConstraintLayout
+    private lateinit var tfClassifier: TFImageClassifier
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +48,11 @@ class HomeFragment : Fragment() {
         setupImageSelection(rootView)
         setupImageReset(rootView)
         return rootView
+    }
+
+    override fun onResume() {
+        super.onResume()
+        tfClassifier = TFImageClassifier(requireContext(), IMAGE_WIDTH, IMAGE_HEIGHT)
     }
 
     private fun setupImageReset(rootView: View) {
@@ -87,20 +95,20 @@ class HomeFragment : Fragment() {
     }
 
     private fun handleImageSelection(uri: Uri) {
-        try {
-            val source = ImageDecoder.createSource(
-                requireActivity().contentResolver,
-                uri
-            )
-            val bitmap = ImageDecoder.decodeBitmap(source)
-            displaySelectedImage(bitmap)
+        val bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, uri)
+        //Using deprecated method here ImageDecoder method was yielding Config#HARDWARE bitmaps.
 
-        } catch (ioException: IOException) {
-            Log.e(
-                LOGGER_TAG,
-                "Unable to select image, because of exception ${ioException.message}"
-            )
-        }
+        displaySelectedImage(bitmap)
+        startImageClassification(bitmap)
+    }
+
+    private fun startImageClassification(bitmap: Bitmap) {
+        val scaledBitmap = Bitmap.createScaledBitmap(bitmap, IMAGE_WIDTH, IMAGE_HEIGHT, false)
+        val results: Collection<Recognition?>? = tfClassifier.doRecognize(scaledBitmap)
+        Log.d(
+            LOGGER_TAG,
+            "Got the following results from Tensorflow: $results"
+        )
     }
 
     private fun displaySelectedImage(bitmap: Bitmap) {
