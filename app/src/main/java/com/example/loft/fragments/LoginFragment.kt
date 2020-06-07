@@ -35,8 +35,16 @@ class LoginFragment : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_login, container, false)
         setupLoginFields(rootView)
+        setupForgotPassword(rootView)
         setupRegisterButton(rootView)
         return rootView
+    }
+
+    private fun setupForgotPassword(rootView: View) {
+        val forgotPasswordTextView = rootView.findViewById<TextView>(R.id.forgot_password)
+        forgotPasswordTextView.setOnClickListener {
+            handleErrorState("Sorry! This feature isn't implemented \uD83D\uDE11")
+        }
     }
 
     private fun setupLoginFields(rootView: View) {

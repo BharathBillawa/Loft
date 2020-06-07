@@ -34,5 +34,11 @@
         android:name="com.example.loft.fragments.SignUpFragment"
         android:label="@string/sign_up_fragment_label"
         tools:layout="@layout/fragment_sign_up">
+
+        <action
+            android:id="@+id/action_start_home_fragment"
+            app:destination="@id/homeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/signUpFragment" />
     </fragment>
 </navigation>

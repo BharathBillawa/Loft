@@ -37,7 +37,6 @@ class LoginVM: ViewModel() {
                         Log.d(LOGGER_TAG, "signInWithEmail:success")
                         currentState.value = LoginStates.Success
                     } else {
-                        // If sign in fails, display a message to the user.
                         Log.w(LOGGER_TAG, "signInWithEmail:failure", task.exception)
                         currentState.value = LoginStates.Error(UNABLE_TO_LOGIN)
                     }

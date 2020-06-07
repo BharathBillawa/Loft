@@ -4,14 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.LoginFragment">
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".fragments.LoginFragment"
+    android:focusable="true">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/welcome_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="cursive"
-        android:text="Let's"
+        android:text="@string/sign_up_welcome"
         android:textColor="@color/result_label"
         android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/user_text_field"
@@ -26,14 +29,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="cursive"
-        android:text="Begin our journey ..."
+        android:text="@string/sign_up_message"
         android:textColor="@color/result_percentage"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/user_text_field"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@+id/welcome_label"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_label"
         app:layout_constraintVertical_bias="0" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -41,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:hintTextColor="@color/green_dark"
-        android:hint="Username"
+        android:hint="@string/username_hint"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/password_text_field"
         app:layout_constraintVertical_chainStyle="packed"
@@ -50,6 +53,7 @@
         android:layout_marginEnd="70dp" >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/username_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/green_dark"
@@ -63,7 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:hintTextColor="@color/green_dark"
-        android:hint="Password"
+        android:hint="@string/password_hint"
         app:endIconMode="password_toggle"
         app:layout_constraintBottom_toTopOf="@+id/reenter_password_text_field"
         app:layout_constraintTop_toBottomOf="@+id/user_text_field"
@@ -72,6 +76,7 @@
         android:layout_marginEnd="70dp" >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/green_dark"
@@ -86,15 +91,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:hintTextColor="@color/green_dark"
-        android:hint="Retype password"
+        android:hint="@string/retype_password_hint"
         app:endIconMode="password_toggle"
-        app:layout_constraintBottom_toTopOf="@+id/login_button"
+        app:layout_constraintBottom_toTopOf="@+id/sign_up_button"
         app:layout_constraintTop_toBottomOf="@+id/password_text_field"
         android:layout_marginBottom="30dp"
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp" >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/retype_password_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/green_dark"
@@ -105,17 +111,28 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/login_button"
+        android:id="@+id/sign_up_button"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp"
-        android:text="Sign Up"
+        android:text="@string/sign_up_button_label"
         android:textAllCaps="false"
         android:textSize="24sp"
         android:textColor="@color/green_dark"
         app:layout_constraintTop_toBottomOf="@+id/reenter_password_text_field"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="-100dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/result_label"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

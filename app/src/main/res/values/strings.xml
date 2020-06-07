@@ -22,4 +22,8 @@
     <string name="new_user_message">"New user? please "</string>
     <string name="register_label"><![CDATA[register ->]]></string>
     <string name="dismiss_snack_bar_label">"OK"</string>
+    <string name="sign_up_welcome">Let\'s</string>
+    <string name="sign_up_message">Begin our journey …</string>
+    <string name="retype_password_hint">Retype password</string>
+    <string name="sign_up_button_label">Sign Up</string>
 </resources>
