@@ -12,14 +12,8 @@ This an app built as a way to show case things that I have learnt as part of **#
 - The application supports both dark and light modes (Not going to lie but new preview release of android studio did most of the work here 😑, though I struggled in other places with preview release 🤔).
 - I tried out **FireBase** authentication for the first time and implemented `Sign In` and `Sign Up` using ViewModels and  LiveData.
 
-## Test credentials
-There is not a lot of validation when you register in the app, but if you want test credentials you can use :
-   > Username: test@test.com
-   > Password: 1234567
-
-  **OR**
-   > Username: test2@test.com
-   > Password: 1234567
+## Setup
+Create a project on `Firebase` and include the google services API keys (`google-services.json`) in the app's root directory.
 
 ## Screen captures
 ### Light Mode: 
