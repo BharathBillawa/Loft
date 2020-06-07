@@ -20,3 +20,11 @@ There is not a lot of validation when you register in the app, but if you want t
   **OR**
    > Username: test2@test.com
    > Password: 1234567
+
+## Screen captures
+### Light Mode: 
+![test](https://raw.githubusercontent.com/BharathBillawa/Loft/master/images/light4.png =x350)                    ![test](https://raw.githubusercontent.com/BharathBillawa/Loft/master/images/light5.png =x350) ![test](https://raw.githubusercontent.com/BharathBillawa/Loft/master/images/light3.png =x350) ![test](https://raw.githubusercontent.com/BharathBillawa/Loft/master/images/light2.png =x350) 
+
+### Dark Mode: 
+
+![test](https://raw.githubusercontent.com/BharathBillawa/Loft/master/images/dark1.png =x350)                    ![test](https://raw.githubusercontent.com/BharathBillawa/Loft/master/images/dark2.png =x350) ![test](https://raw.githubusercontent.com/BharathBillawa/Loft/master/images/dark3.png =x350) ![test](https://raw.githubusercontent.com/BharathBillawa/Loft/master/images/dark4.png =x350) 
